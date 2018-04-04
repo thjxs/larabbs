@@ -19,6 +19,7 @@
         @include('layouts._header')
 
         <div class="contaienr">
+            @include('layouts._message')
             @yield('content')
         </div>
 
