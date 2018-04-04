@@ -13,3 +13,6 @@
 # 图片裁剪
 
 # 授权策略控制用户访问
+
+# 删除表并重新填充数据
+    php artisan migrate:refresh --seed
