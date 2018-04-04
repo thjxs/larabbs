@@ -7,3 +7,72 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+body {
+    font-family: Hiragino Sans GB, "Hiragino Sans GB", Helvetica, "Microsoft YaHei"
+}
+
+/* header */
+.navbar-static-top {
+    border-color: #e7e7e7;
+    background-color: #fff;
+    box-shadow: 0px 1px 11px 2px rgba(42, 42, 42, 0.1);
+    border-top: 4px solid #00b5ad;
+    margin-bottom: 40px;
+    margin-top: 0px;
+}
+
+/* User register page */
+.register-page {
+    img.captcha {
+        margin-bottom: 0px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+}
+
+/* footer */
+
+footer {
+    margin-top: 45px;
+    padding-top: 5px;
+    border-top: 1px solid #eaeaea;
+    color: #777;
+
+    .list-inline {
+        margin: 0;
+        padding: 0;
+    }
+
+    .copyright {
+        font-size: 14px;
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    .col-lg-8 {
+        width: 100%;
+    }
+
+    a {
+        color: #555;
+    }
+
+    a:hover {
+        color: #222;
+    }
+
+    #weixin {
+        position: relative;
+    }
+    #weixin:hover #mmqrcode{
+        display: block;
+    }
+    #mmqrcode {
+        position: absolute;
+        width: 150px;
+        bottom: 30px;
+        left: -48px;
+        display: none;
+    }
+}

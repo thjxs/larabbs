@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -32,12 +32,12 @@ class User extends Authenticatable
      *
      * @return url
      */
-    public function gravatar($size = '100')
+    public function avatar($size = '100')
     {
         //$this->attributes['email']  获取用户的邮箱
         //trim 剔除空白内容
         $hash = md5(strtolower(trim($this->attributes['email'])));
-        $gravatar = $this->attributes['gravatar'] ? : "http://www.gravatar.com/avatar/$hash?s=$size";
-        return $gravatar;
+        $avatar = $this->attributes['avatar'] ? : "http://www.gravatar.com/avatar/$hash?s=$size";
+        return $avatar;
     }
 }
