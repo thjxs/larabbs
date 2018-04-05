@@ -42,12 +42,21 @@
 
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ route('users.edit', Auth::id()) }}">Edit</a>
+                                <a href="{{ route('users.show', Auth::id()) }}">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                    Center
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('users.edit', Auth::id()) }}">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    Edit
+                                </a>
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
+                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                                     Logout
                                 </a>
 

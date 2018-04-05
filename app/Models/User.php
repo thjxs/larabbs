@@ -27,6 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function topics()
+    {
+        return $this->hasMany(Topic::class);
+    }
+
     /**
      * Gravatar 全球通用头像
      *
