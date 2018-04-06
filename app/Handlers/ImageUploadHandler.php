@@ -2,6 +2,8 @@
 
 namespace App\Handlers;
 
+use Image;
+
 class ImageUploadHandler
 {
     protected $allowed_ext = ['png', 'jpg', 'gif', 'jpeg'];
