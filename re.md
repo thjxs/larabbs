@@ -16,3 +16,13 @@
 
 # 删除表并重新填充数据
     php artisan migrate:refresh --seed
+
+# 代码生成器
+
+# debugbar
+
+# 使用预加载修复 N+1 问题
+
+# 使用拓展包实现连接选中的状态
+
+# Laravel 本地作用域
