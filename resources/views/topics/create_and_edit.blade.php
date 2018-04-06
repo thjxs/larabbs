@@ -1,5 +1,24 @@
 @extends('layouts.app')
 
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/simditor.css') }}">
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/module.js') }}"></script>
+<script src="{{ asset('js/hotkeys.js') }}"></script>
+<script src="{{ asset('js/uploader.js') }}"></script>
+<script src="{{ asset('js/simditor.js') }}"></script>
+
+<script>
+    $(document).ready(function (){
+        let editor = new Simditor({
+            textarea: $('#editor'),
+        });
+    });
+</script>
+@endsection
+
 @section('content')
 
 <div class="container">
@@ -31,8 +50,7 @@
 
 
                     <div class="form-group">
-                    	<label for="title-field">Title</label>
-                    	<input class="form-control" type="text" name="title" id="title-field" value="{{ old('title', $topic->title ) }}" />
+                    	<input class="form-control" type="text" name="title" placeholder="title" value="{{ old('title', $topic->title ) }}" />
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="category_id" required>
@@ -43,8 +61,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                    	<label for="body-field">Body</label>
-                    	<textarea name="body" id="body-field" class="form-control" rows="3">{{ old('body', $topic->body ) }}</textarea>
+                    	<textarea name="body" id="editor" class="form-control" rows="3">{{ old('body', $topic->body ) }}</textarea>
                     </div>
                     <div class="well well-sm">
                         <button type="submit" class="btn btn-primary">Save</button>
