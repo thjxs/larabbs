@@ -45,4 +45,13 @@ class User extends Authenticatable
         $avatar = $this->attributes['avatar'] ? : "http://www.gravatar.com/avatar/$hash?s=$size";
         return $avatar;
     }
+
+    /*
+    * auth operaton
+    *
+    */
+    public function isAuthOf($model)
+    {
+        return $this->id === $model->user_id;
+    }
 }
