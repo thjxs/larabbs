@@ -72,6 +72,15 @@ body {
     .pagination {
         margin: 12px 0;
     }
+
+    .meta {
+        font-size: .9em;
+        color: #b3b3b3;
+    }
+
+    .reply-content {
+        margin: 6px 0;
+    }
 }
 
 /* Topic index page */
@@ -116,6 +125,22 @@ body {
             border: 0;
             border: 1px solid #dcebf5;
         }
+    }
+}
+
+.topic-reply {
+    hr {
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    a {
+        color: inherit;
+    }
+
+    .meta {
+        font-size: .9em;
+        color: #b3b3b3;
     }
 }
 
