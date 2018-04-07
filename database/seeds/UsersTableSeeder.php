@@ -24,7 +24,6 @@ class UsersTableSeeder extends Seeder
 
         $user = User::first();
         $user->name = 'Tan';
-        $user->password =
         $user->email = 'tanhongjianx@163.com';
         $user->save();
     }
