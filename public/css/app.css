@@ -8379,6 +8379,20 @@ body {
   margin-right: 8px;
 }
 
+/* Notifications badge */
+
+.notificatons-badge {
+  margin-top: -1;
+}
+
+.notificatons-badge .badge-fade {
+  background-color: #ebe8e8;
+}
+
+.notificatons-badge .badge-hint {
+  background-color: #d15b47 !important;
+}
+
 /* User register page */
 
 .register-page img.captcha {

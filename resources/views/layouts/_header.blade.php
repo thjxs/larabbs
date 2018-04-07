@@ -37,6 +37,14 @@
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                         </a>
                     </li>
+                    {{-- notify --}}
+                    <li>
+                        <a href="{{ route('notifications.index') }}" class="notifications-badge" style="margin-top: -2px;">
+                            <span class="badge badge-{{ Auth::user()->notification_count > 0 ? 'hint' : 'fade' }}" title="notification">
+                                {{ Auth::user()->notification_count }}
+                            </span>
+                        </a>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
                             <span class="user-avatar pull-left" style="margin-right: 8px; margin-top: -5px;">

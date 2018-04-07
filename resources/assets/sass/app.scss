@@ -12,6 +12,7 @@ body {
     font-family: Hiragino Sans GB, "Hiragino Sans GB", Helvetica, "Microsoft YaHei"
 }
 
+
 /* header */
 .navbar-static-top {
     border-color: #e7e7e7;
@@ -30,6 +31,18 @@ body {
                 margin-right: 8px;
             }
         }
+    }
+}
+
+/* Notifications badge */
+.notificatons-badge {
+    margin-top: -1;
+    .badge-fade {
+        background-color: #ebe8e8;
+    }
+
+    .badge-hint {
+        background-color: #d15b47 !important;
     }
 }
 
