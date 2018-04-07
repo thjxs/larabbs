@@ -42,3 +42,15 @@
 # 队列系统的使用，新建任务类，命令行监听
 
 # Horizon 使用
+
+# blade 语法 includeWhen
+
+# 使用模型监控器实现计数器
+
+# laravel 消息通知 database email
+
+# 重写 Trait -- Notifiable notify()
+
+# 使用队列发送邮件
+
+# 使用监控器 实现连带删除

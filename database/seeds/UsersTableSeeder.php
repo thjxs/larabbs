@@ -25,6 +25,11 @@ class UsersTableSeeder extends Seeder
         $user = User::first();
         $user->name = 'Tan';
         $user->email = 'tanhongjianx@163.com';
+        $user->assignRole('Founder');
         $user->save();
+
+        $user = User::find(2);
+        $user->email = 'T@mail.com';
+        $user->assignRole('Maintainer');
     }
 }
