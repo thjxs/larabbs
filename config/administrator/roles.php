@@ -64,9 +64,4 @@ return [
     'rules' => [
         'name' => 'required|max:15|unique:roles,name',
     ],
-
-    'message' => [
-        'name.required' => 'can not be empty',
-        'name.unique' => 'name, exist',
-    ],
 ];
