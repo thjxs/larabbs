@@ -69,7 +69,9 @@ return array(
             'topics',
             'replies',
         ],
-
+        'Setting' => [
+            'settings.site',
+        ],
     ],
 
     /*
