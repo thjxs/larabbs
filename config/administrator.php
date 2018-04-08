@@ -59,8 +59,10 @@ return array(
      *	)
      */
     'menu' => [
-        'per' => [
+        'Users and permission' => [
             'users',
+            'roles',
+            'permissions',
         ],
     ],
 
