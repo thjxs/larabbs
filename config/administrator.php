@@ -21,7 +21,7 @@ return array(
      *
      * @type string
      */
-    'title' => config('app.name'),
+    'title' => env('APP_NAME', 'LARABBS'),
 
     /*
      * The path to your model config directory
@@ -59,7 +59,7 @@ return array(
      *	)
      */
     'menu' => [
-        'user and permission' => [
+        'per' => [
             'users',
         ],
     ],

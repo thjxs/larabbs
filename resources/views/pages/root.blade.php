@@ -3,5 +3,6 @@
 @section('title', 'home')
 
 @section('content')
-hello
+
+{{ public_path() . '/uploads/images/avatars/' }}
 @endsection

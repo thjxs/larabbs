@@ -9,7 +9,7 @@
             <div class="panel-body">
                 <div class="media">
                     <div align="center">
-                        <img src="{{ $user->avatar(300) }}" class="thumbnail img-responsive" width="300px" height="300px">
+                        <img src="{{ $user->getAvatar(300) }}" class="thumbnail img-responsive" width="300px" height="300px">
                     </div>
 
                     <div class="media-body">

@@ -33,6 +33,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected function setPasswordAttribute($password)
+    {
+        if (strlen($password) != 60) {
+            $password = bcrypt($password);
+        }
+        $this->attributes['password'] = $password;
+    }
+
     public function topics()
     {
         return $this->hasMany(Topic::class);
@@ -64,13 +72,22 @@ class User extends Authenticatable
      *
      * @return url
      */
-    public function avatar($size = '100')
+    public function getAvatar($size = '100')
     {
         //$this->attributes['email']  获取用户的邮箱
         //trim 剔除空白内容
         $hash = md5(strtolower(trim($this->attributes['email'])));
         $avatar = $this->attributes['avatar'] ? : "http://www.gravatar.com/avatar/$hash?s=$size";
         return $avatar;
+    }
+
+    public function setAvatarAttribute($path)
+    {
+        if (! starts_with($path, 'http')) {
+            $path = config('app.url') . "/uploads/images/avatars/$path";
+        }
+
+        $this->attributes['avatar'] = $path;
     }
 
     /*
