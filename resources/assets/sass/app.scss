@@ -1,4 +1,3 @@
-
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
@@ -30,6 +29,24 @@ body {
             .glyphicon {
                 margin-right: 8px;
             }
+        }
+    }
+}
+
+/* sidebar */
+.sidebar {
+    .panel-body {
+        padding: 12px;
+    }
+    hr {
+        margin-top: 8px;
+        margin-bottom: 10px;
+    }
+    .active-users {
+        a.media {
+            color: #797878;
+            line-height: 26px;
+            font-size: 0.9em;
         }
     }
 }
