@@ -16,7 +16,7 @@
                 <div class="media">
                     <div align="center">
                         <a href="{{ route('users.show', $topic->user->id) }}">
-                            <img src="{{ $topic->user->avatar() }}" class="thumbanil img-responsive">
+                            <img src="{{ $topic->user->getAvatar() }}" class="thumbanil img-responsive">
                         </a>
                     </div>
                 </div>
