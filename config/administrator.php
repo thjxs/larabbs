@@ -71,6 +71,7 @@ return array(
         ],
         'Setting' => [
             'settings.site',
+            'links',
         ],
     ],
 
