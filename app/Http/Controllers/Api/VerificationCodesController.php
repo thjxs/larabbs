@@ -11,7 +11,19 @@ class VerificationCodesController extends Controller
 {
     public function store(VerificationCodeRequest $request, EasySms $easySms)
     {
-        $phone = $request->phone;
+        $captchaDate = \Cache::get($request->captcha_key);
+
+        if (!$captchaDate) {
+            return $this->response->error('captcha expired', 422);
+        }
+
+        if (!hash_equals($captchaDate['code'], $request->captcha_code)) {
+            \Cache::forget($request->captcha_key);
+            return $this->response->errorUnauthorized('captcha error');
+        }
+
+        $phone = $captchaDate['phone'];
+
         if (!app()->environment('production')) {
             $code = '1234';
         } else {
