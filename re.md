@@ -88,3 +88,17 @@
 # DingoApi
 
 # PostMan
+
+# 手机 APP 注册
+
+# 短信运营商
+
+# 图片验证码接口 短信验证码接口 注册用户接口
+
+# api.throttle 限制接口调用频率
+
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6de951435fc487da&redirect_uri=http://larabbs.test&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
+
+https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx6de951435fc487da&secret=2a2f19fc5b141e1a1ef712f77e953972&code=081poI2T00AuaX1aoz3T0ZMQ2T0poI2I&grant_type=authorization_code
+
+https://api.weixin.qq.com/sns/userinfo?access_token=8_rKK1S6vLRXg96-f3FE0RYviTkqonchYbC5UeL-kmuZZH2XViaGrOHKJI6nxqKXp5WZsFlGWl858BGCJ-JGjIPQ&openid=opmZ91kc_HIsyZaaPwQyE8A2dxn8&lang=zh_CN
