@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use Dingo\Api\Http\FormRequest;
 
-class AuthorizationRequest extends FormRequest
+class TopicRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,18 @@ class AuthorizationRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required|string',
-            'password' => 'required|string|min:6',
+            'title' => 'required|string',
+            'body' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'title' => 'title',
+            'body' => 'topic content',
+            'category_id' => 'category',
         ];
     }
 }
