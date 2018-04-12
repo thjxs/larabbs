@@ -36,6 +36,8 @@ $api->version('v1', [
         $api->put('authorizations/current', 'AuthorizationsController@update')->name('api.authorizations.update');
         $api->delete('authorizations/current', 'AuthorizationsController@destroy')->name('api.authorizations.destroy');
         $api->get('categories', 'CategoriesController@index')->name('api.categories.index');
+        $api->get('topics', 'TopicsController@index')->name('api.topics.index');
+        $api->get('users/{user}/topics', 'TopicsController@userIndex')->name('api.users.topics.index');
         $api->group(['middleware' => 'api.auth'], function($api) {
             $api->get('user', 'UsersController@me')->name('api.user.show');
             $api->post('images', 'ImagesController@store')->name('api.images.store');
