@@ -97,6 +97,12 @@
 
 # api.throttle 限制接口调用频率
 
+# Socialite OAuth 2.0
+
+# JWT and jwt-auth
+
+# 第三方登录、用户登录等接口
+
 https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6de951435fc487da&redirect_uri=http://larabbs.test&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
 
 https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx6de951435fc487da&secret=2a2f19fc5b141e1a1ef712f77e953972&code=081poI2T00AuaX1aoz3T0ZMQ2T0poI2I&grant_type=authorization_code

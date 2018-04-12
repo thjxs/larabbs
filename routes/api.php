@@ -21,6 +21,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
+    'middleware' => 'serializer:array',
 ], function ($api) {
     $api->group([
         'middleware' => 'api.throttle',
@@ -34,5 +35,8 @@ $api->version('v1', [
         $api->post('authorizations', 'AuthorizationsController@store')->name('api.authorizations.store');
         $api->put('authorizations/current', 'AuthorizationsController@update')->name('api.authorizations.update');
         $api->delete('authorizations/current', 'AuthorizationsController@destroy')->name('api.authorizations.destroy');
+        $api->group(['middleware' => 'api.auth'], function($api) {
+            $api->get('user', 'UsersController@me')->name('api.user.show');
+        });
     });
 });
