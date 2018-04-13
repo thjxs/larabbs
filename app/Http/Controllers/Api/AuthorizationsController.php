@@ -80,7 +80,7 @@ class AuthorizationsController extends Controller
         $credentials['password'] = $request->password;
 
         if (!$token = \Auth::guard('api')->attempt($credentials)) {
-            return $this->response->errorUnauthorized('incorrect user/password');
+            return $this->response->errorUnauthorized('auth.failed');
         }
 
         return $this->respondWithToken($token)->setStatusCode(201);
