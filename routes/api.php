@@ -39,6 +39,7 @@ $api->version('v1', [
         $api->get('topics', 'TopicsController@index')->name('api.topics.index');
         $api->get('topics/{topic}', 'TopicsController@show')->name('api.topics.show');
         $api->get('users/{user}/topics', 'TopicsController@userIndex')->name('api.users.topics.index');
+        $api->get('topics/{topic}/replies', 'RepliesController@index')->name('api.topics.replies.index');
         $api->group(['middleware' => 'api.auth'], function($api) {
             $api->get('user', 'UsersController@me')->name('api.user.show');
             $api->post('images', 'ImagesController@store')->name('api.images.store');
