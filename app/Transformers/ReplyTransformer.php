@@ -11,7 +11,7 @@ class ReplyTransformer extends TransformerAbstract
 
     public function includeUser(Reply $reply)
     {
-        return $this->item($reply->use, new UserTransformer());
+        return $this->item($reply->user, new UserTransformer());
     }
 
     public function includeTopic(Reply $reply)

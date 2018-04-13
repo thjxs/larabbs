@@ -9,14 +9,14 @@ class NotificationsController extends Controller
 {
     public function index()
     {
-        $notificaitons = $this->user->notificaitons()->paginate(20);
+        $notificaitons = $this->user->notifications()->paginate(20);
         return $this->response->paginator($notificaitons, new NotificationTransformer());
     }
 
     public function stats()
     {
         return $this->response->array([
-            'unread_count' => $this->user()->notificaiton_count,
+            'unread_count' => $this->user()->notification_count,
         ]);
     }
 
