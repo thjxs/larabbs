@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Transfomers;
+namespace App\Transformers;
 
 use League\Fractal\TransformerAbstract;
 use Illuminate\Notifications\DatabaseNotification;
