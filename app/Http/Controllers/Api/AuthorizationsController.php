@@ -11,9 +11,11 @@ use Zend\Diactoros\Response as Psr7Response;
 use Psr\Http\Message\ServerRequestInterface;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
+use App\Traits\PassportToken;
 
 class AuthorizationsController extends Controller
 {
+    use PassportToken;
 
     protected function respondWithToken($token)
     {
@@ -72,7 +74,7 @@ class AuthorizationsController extends Controller
                 break;
         }
 
-        $token = Auth::guard('api')->fromUser($user);
+        $token = $this->getBearerTokenByUser($user, '1', false);
         return $this->respondWithToken($token)->setStatusCode(201);
     }
 
