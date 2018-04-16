@@ -17,15 +17,6 @@
         <textarea name="introduction" id="introduction" class="form-control" rows="3">{{ old('introduction', $user->introduction) }}</textarea>
     </div>
 
-    <div class="form-group">
-        <label class="avatar">Avatar</label>
-        <input type="file" name="avatar">
-        @if($user->avatar)
-            <br>
-            <img src="{{ $user->avatar }}" class="thumbnail img-responsive" width="200px">
-        @endif
-    </div>
-
     <div class="well well-sm">
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
