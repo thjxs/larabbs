@@ -1,11 +1,11 @@
 <div class="stats">
-    <a href="{{ route('users.followings', $user->id) }}">
+    <a href="{{ route('users.show_followings', $user->id) }}">
         <strong id="following" class="stats">
             {{ count($user->followings) }}
         </strong>
         Follow
     </a>
-    <a href="{{ route('users.followers', $user->id) }}">
+    <a href="{{ route('users.show_followers', $user->id) }}">
         <strong id="followers" class="stats">
             {{ count($user->followers) }}
         </strong>
