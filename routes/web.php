@@ -15,7 +15,8 @@ Route::get('/', 'TopicsController@index')->name('root');
 
 Auth::routes();
 
-Route::patch('users/{user}/update_avatar', 'UsersController@update_avatar')->name('users.update_avatar');
+Route::get('users/{user}/edit_avatar', 'UsersController@edit_avatar')->name('users.edit_avatar');
+Route::put('users/{user}/update_avatar', 'UsersController@update_avatar')->name('users.update_avatar');
 
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
 
