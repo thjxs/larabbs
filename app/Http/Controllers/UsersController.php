@@ -39,4 +39,12 @@ class UsersController extends Controller
         $user->update($data);
         return redirect()->route('users.show', $user->id)->with('success', 'Profile updated');
     }
+
+    public function update_avatar(UserRequest $request, ImageUploadHandler $uploader, User $user)
+    {
+        $this->authorize('update', $user);
+        if ($request->avatar) {
+            return redirect()->route('users.show', $user->id)->with('success', 'avatar update');
+        }
+    }
 }

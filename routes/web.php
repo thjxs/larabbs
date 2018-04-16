@@ -15,6 +15,8 @@ Route::get('/', 'TopicsController@index')->name('root');
 
 Auth::routes();
 
+Route::patch('users/{user}/update_avatar', 'UsersController@update_avatar')->name('users.update_avatar');
+
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
 
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
@@ -30,3 +32,4 @@ Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]
 Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
 
 Route::get('permission-denied', 'PagesController@permissionDenied')->name('permission-denied');
+
