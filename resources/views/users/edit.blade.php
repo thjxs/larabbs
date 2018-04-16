@@ -1,8 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="panel panel-default col-md-10 col-md-offset-1">
+<div class="row">
+    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs user-info">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <a href="#"><div class="media-body">Edit</div></a>
+                <a href="#"><div class="media-body">Edit_avatar</div></a>
+                <a href="#"><div class="media-body">Edit</div></a>
+                <a href="#"><div class="media-body">Edit</div></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 col-md-9 col-sm-12 col-xs-12">
         <div class="panel-heading">
             <h4><i class="glyphicon glyphicon-edit">Edit</i></h4>
         </div>

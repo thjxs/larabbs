@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $user->name . "'s center");
+@section('title', $user->name . "s center");
 
 @section('content')
 <div class="row">

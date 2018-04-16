@@ -24,11 +24,17 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|between:3,25|regex:/^[A-Za-z0-9\-\_]+$/|unique:users,name,' . Auth::id(),
-            'email' => 'required|email',
-            'introduction' => 'max:80',
-            'avatar' => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=200,min_height=200',
-        ];
+        if ($this->routeIs('users.update_avatar')) {
+            return [
+                'avatar' => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=200,min_height=200'
+            ];
+        } else {
+            return [
+                'name' => 'required|between:3,25|regex:/^[A-Za-z0-9\-\_]+$/|unique:users,name,' . Auth::id(),
+                'email' => 'required|email',
+                'introduction' => 'max:80',
+                'avatar' => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=200,min_height=200',
+            ];
+        }
     }
 }
