@@ -19,8 +19,8 @@ Route::get('users/{user}/edit_avatar', 'UsersController@edit_avatar')->name('use
 Route::put('users/{user}/update_avatar', 'UsersController@update_avatar')->name('users.update_avatar');
 Route::get('users/{user}/followings', 'UsersController@showFollowings')->name('users.show_followings');
 Route::get('users/{user}/followers', 'UsersController@showFollowers')->name('users.show_followers');
-Route::post('users/followers/{user}', 'FollowersController@store')->name('followers.store');
-Route::delete('users/followers/{user}', 'FollowersController@destroy')->name('followers.destroy');
+Route::post('/users/followers/{user}', 'FollowersController@store')->name('followers.store');
+Route::delete('/users/followers/{user}', 'FollowersController@destroy')->name('followers.destroy');
 
 
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);

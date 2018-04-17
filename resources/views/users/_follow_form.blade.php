@@ -7,7 +7,7 @@
             <button type="submit" class="btn btn-sm">unfollow</button>
         </form>
     @else
-        <form action="{{ route('followers.store', $user->id) }}" method="psot">
+        <form action="{{ route('followers.store', $user->id) }}" method="post">
             {{ csrf_field() }}
             <button type="submit" class="btn btn-sm btn-primary">follow</button>
         </form>
