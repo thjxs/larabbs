@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\Topic;
 use App\Jobs\TranslateSlug;
 use Parsedown;
+use App\Notifications\TopicCreated;
 
 // creating, created, updating, updated, saving,
 // saved,  deleting, deleted, restoring, restored
@@ -29,6 +30,13 @@ class TopicObserver
         $topic->body = clean($topic->body, 'user_topic_body');
         //excerpt
         $topic->excerpt = make_excerpt($topic->body);
+    }
+
+    public function created(Topic $topic)
+    {
+        foreach ($topic->user->followers as $follower) {
+            $follower->notify(new TopicCreated($topic));
+        }
     }
 
     public function saved(Topic $topic)
