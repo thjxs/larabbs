@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Topic;
 use App\Jobs\TranslateSlug;
+use Parsedown;
 
 // creating, created, updating, updated, saving,
 // saved,  deleting, deleted, restoring, restored
@@ -22,6 +23,8 @@ class TopicObserver
 
     public function saving(Topic $topic)
     {
+        $parse = new Parsedown();
+        $topic->body = $parse->setBreaksEnabled(true)->text($topic->body);
         //xss
         $topic->body = clean($topic->body, 'user_topic_body');
         //excerpt

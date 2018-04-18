@@ -1,30 +1,14 @@
 @extends('layouts.app')
 
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/simditor.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/module.js') }}"></script>
-<script src="{{ asset('js/hotkeys.js') }}"></script>
-<script src="{{ asset('js/uploader.js') }}"></script>
-<script src="{{ asset('js/simditor.js') }}"></script>
-
-<script>
-    $(document).ready(function (){
-        let editor = new Simditor({
-            textarea: $('#editor'),
-            upload: {
-                url: '{{ route('topics.upload_image') }}',
-                params: { _token: '{{ csrf_token() }}'},
-                fileKey: 'upload_file',
-                connectionCount: 3,
-                leaveConfirm: 'uploading...'
-            },
-            pasteImage: true,
-        });
-    });
-</script>
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script>
+        var simplemde = new SimpleMDE({ element: document.getElementById("editor") });
+    </script>
 @endsection
 
 @section('content')
@@ -69,7 +53,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                    	<textarea name="body" id="editor" class="form-control" rows="3">{{ old('body', $topic->body ) }}</textarea>
+                    	<textarea name="body" id="editor" class="form-control" rows="3">{!! $topic->body !!}</textarea>
                     </div>
                     <div class="well well-sm">
                         <button type="submit" class="btn btn-primary">Save</button>

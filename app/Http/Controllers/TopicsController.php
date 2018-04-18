@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicRequest;
 use App\Handlers\ImageUploadHandler;
+use League\HTMLToMarkdown\HtmlConverter;
 
 class TopicsController extends Controller
 {
@@ -55,6 +56,10 @@ class TopicsController extends Controller
 	{
         $this->authorize('update', $topic);
         $categories = Category::all();
+
+        $converter = new HtmlConverter();
+        $topic->body = $converter->convert($topic->body);
+
 		return view('topics.create_and_edit', compact('topic', 'categories'));
 	}
 
