@@ -32,7 +32,7 @@ class TopicReplied extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database', 'mail'];
+        return ['database',];
     }
 
     public function toDatabase($notifiable)
@@ -45,7 +45,7 @@ class TopicReplied extends Notification implements ShouldQueue
             'reply_content' => $this->reply->content,
             'user_id' => $this->reply->user->id,
             'user_name' => $this->reply->user->name,
-            'user_avatar' => $this->reply->user->avatar(),
+            'user_avatar' => $this->reply->user->getAvatar(),
             'topic_link' => $link,
             'topic_id' => $topic->id,
             'topic_title' => $topic->title,
