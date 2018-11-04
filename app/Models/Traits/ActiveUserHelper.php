@@ -10,19 +10,19 @@ use DB;
 
 trait ActiveUserHelper
 {
-    protected $users = [];
+    protected static $activeUsers = [];
 
-    protected $topic_weight = 4;
-    protected $reply_weight = 1;
-    protected $pass_days = 7;
-    protected $user_number = 6;
+    protected static $topicWeights = 4;
+    protected static $replyWeights = 1;
+    protected static $passDays = 7;
+    protected static $userLimits = 6;
 
-    protected $cache_key = 'larabbs_active_users';
-    protected $cache_expire_in_minutes = 65;
+    protected $cacheKey = 'larabbs_active_users';
+    protected $cacheExpireInMinutes = 65;
 
     public function getActiveUsers()
     {
-        return Cache::remember($this->cache_key, $this->cache_expire_in_minutes, function() {
+        return Cache::remember($this->cacheKey, $this->cacheExpireInMinutes, function() {
             return $this->calculateActiveUsers();
         });
     }
@@ -35,59 +35,55 @@ trait ActiveUserHelper
 
     private function calculateActiveUsers()
     {
-        $this->calculateTopicScore();
-        $this->calculateReplyScore();
+        static::calculateReplyScore();
+        static::calculateTopicScore();
 
-        $users = array_sort($this->users, function($user) {
-            return $user['score'];
-        });
+        arsort(static::$activeUsers);
 
-        $users = array_reverse($users, true);
+        array_slice(static::$activeUsers, 0, static::$userLimits, true);
 
-        $users = array_slice($users, 0, $this->user_number, true);
+        $activeUsersCollection = collect();
 
-        $active_users = collect();
-
-        foreach ($users as $user_id => $user) {
+        foreach (static::$activeUsers as $user_id => $user) {
             $user = $this->find($user_id);
             if ($user) {
-                $active_users->push($user);
+                $activeUsersCollection->push($user);
             }
         }
 
-        return $active_users;
+        return $activeUsersCollection;
     }
 
-    private function calculateTopicScore()
+    private static function calculateTopicScore()
     {
-        $topic_users = Topic::query()->select(DB::raw('user_id, count(*) as topic_count'))
-                                    ->where('created_at', '>=', Carbon::now()->subDays($this->pass_days))
-                                    ->groupBy('user_id')
-                                    ->get();
-        foreach ($topic_users as $value) {
-            $this->users[$value->user_id]['score'] = $value->topic_count * $this->topic_weight;
+        $topicUsers = Topic::query()
+            ->select(DB::raw('user_id, count(*) as topic_count'))
+            ->where('created_at', '>=', Carbon::now()->subDays(static::$passDays))
+            ->groupBy('user_id')
+            ->get();
+        foreach ($topicUsers as $user) {
+            static::$activeUsers[$user->user_id]['score'] =
+                (static::$activeUsers[$user->user_id]['score'] ?? 0) +
+                    $user->topic_count * static::$topicWeights;
         }
     }
 
-    private function calculateReplyScore()
+    private static function calculateReplyScore()
     {
-        $reply_users = Reply::query()->select(DB::raw('user_id, count(*) as reply_count'))
-                                    ->where('created_at', '>=', Carbon::now()->subDays($this->pass_days))
-                                    ->groupBy('user_id')
-                                    ->get();
+        $replyUsers = Reply::query()
+            ->select(DB::raw('user_id, count(*) as reply_count'))
+            ->where('created_at', '>=', Carbon::now()->subDays(static::$passDays))
+            ->groupBy('user_id')
+            ->get();
 
-        foreach ($reply_users as $value) {
-            $reply_score = $value->reply_count * $this->reply_weight;
-            if (isset($this->users[$value->user_id])) {
-                $this->users[$value->user_id]['score'] += $reply_score;
-            } else {
-                $this->users[$value->user_id]['score'] = $reply_score;
-            }
+        foreach ($replyUsers as $user) {
+            static::$activeUsers[$user->user_id]['score'] =
+                $user->reply_count * static::$replyWeights;
         }
     }
 
-    private function cacheActiveUers($active_users)
+    private function cacheActiveUers($activeUsersCollection)
     {
-        Cache::put($this->cache_key, $active_users, $this->cache_expire_in_minutes);
+        Cache::put($this->cacheKey, $activeUsersCollection, $this->cacheExpireInMinutes);
     }
 }
