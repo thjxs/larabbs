@@ -21,7 +21,14 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $i = 1;
+        return view('users.edit', compact('user', 'i'));
+    }
+
+    public function edit_avatar(User $user)
+    {
+        $i = 2;
+        return view('users.edit', compact('user', 'i'));
     }
 
     public function update(UserRequest $request, ImageUploadHandler $uploader, User $user)
@@ -32,11 +39,36 @@ class UsersController extends Controller
         if ($request->avatar) {
             $result = $uploader->save($request->avatar, 'avatar', $user->id, 362);
             if($result) {
-                $data['avatar'] = $resultp['path'];
+                $data['avatar'] = $result['path'];
             }
         }
 
         $user->update($data);
         return redirect()->route('users.show', $user->id)->with('success', 'Profile updated');
+    }
+
+    public function update_avatar(UserRequest $request, ImageUploadHandler $uploader, User $user)
+    {
+        $this->authorize('update', $user);
+        $result = $uploader->save($request->avatar, 'avatar', $user->id, 362);
+        if ($result) {
+            $data['avatar'] = $result['path'];
+        }
+        $user->update($data);
+        return redirect()->route('users.show', $user->id)->with('success', 'avatar updated');
+    }
+
+    public function showFollowings(User $user)
+    {
+        $users = $user->followings()->paginate(30);
+        $title = 'followings';
+        return view('users.show_follow', compact('users', 'title'));
+    }
+
+    public function showFollowers(User $user)
+    {
+        $users = $user->followers()->paginate(30);
+        $title = 'followers';
+        return view('users.show_follow', compact('users', 'title'));
     }
 }

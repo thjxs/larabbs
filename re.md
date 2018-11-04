@@ -132,6 +132,15 @@
 # 了解 postman 自动化测试
 
 # 使用 postman 与 apizza 快速生成文档
+
+# OAuth2 密码模式
+
+# Passport 的使用
+
+# 将 JWT 替换为 Passport
+
+# 为第三方登录接口创建  token
+
 https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6de951435fc487da&redirect_uri=http://larabbs.test&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
 
 https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx6de951435fc487da&secret=2a2f19fc5b141e1a1ef712f77e953972&code=081poI2T00AuaX1aoz3T0ZMQ2T0poI2I&grant_type=authorization_code

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $user->name . "'s center");
+@section('title', $user->name . "'s center")
 
 @section('content')
 <div class="row">
@@ -13,6 +13,12 @@
                     </div>
 
                     <div class="media-body">
+                        <hr>
+                        @include('users._stats', ['users' => Auth::user()])
+                        @if(Auth::check())
+                            <hr>
+                            @include('users._follow_form')
+                        @endif
                         <hr>
                         <h4><strong>Profile</strong></h4>
                         <p>{{ $user->introduction }}</p>
