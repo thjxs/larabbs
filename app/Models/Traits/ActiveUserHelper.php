@@ -14,7 +14,7 @@ trait ActiveUserHelper
 
     protected static $topicWeights = 4;
     protected static $replyWeights = 1;
-    protected static $passDays = 7;
+    protected static $pastDays = 7;
     protected static $userLimits = 6;
 
     protected $cacheKey = 'larabbs_active_users';
@@ -58,7 +58,7 @@ trait ActiveUserHelper
     {
         $topicUsers = Topic::query()
             ->select(DB::raw('user_id, count(*) as topic_count'))
-            ->where('created_at', '>=', Carbon::now()->subDays(static::$passDays))
+            ->where('created_at', '>=', Carbon::now()->subDays(static::$pastDays))
             ->groupBy('user_id')
             ->get();
         foreach ($topicUsers as $user) {
@@ -72,7 +72,7 @@ trait ActiveUserHelper
     {
         $replyUsers = Reply::query()
             ->select(DB::raw('user_id, count(*) as reply_count'))
-            ->where('created_at', '>=', Carbon::now()->subDays(static::$passDays))
+            ->where('created_at', '>=', Carbon::now()->subDays(static::$pastDays))
             ->groupBy('user_id')
             ->get();
 
