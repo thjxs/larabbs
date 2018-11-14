@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Topic;
-use App\Models\Link;
 use App\Models\Category;
+use App\Models\Link;
+use App\Models\Topic;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
@@ -17,6 +17,7 @@ class CategoriesController extends Controller
                         ->paginate(20);
         $active_users = $user->getActiveUsers();
         $links = $link->getAllCached();
+
         return view('topics.index', compact('topics', 'category', 'active_users', 'links'));
     }
 }

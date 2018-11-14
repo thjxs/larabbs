@@ -2,10 +2,10 @@
 
 namespace App\Observers;
 
-use App\Models\Topic;
 use App\Jobs\TranslateSlug;
-use Parsedown;
+use App\Models\Topic;
 use App\Notifications\TopicCreated;
+use Parsedown;
 
 // creating, created, updating, updated, saving,
 // saved,  deleting, deleted, restoring, restored

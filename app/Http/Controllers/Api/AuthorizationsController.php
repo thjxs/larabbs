@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use Auth;
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Http\Requests\Api\SocialAuthorizationRequest;
 use App\Http\Requests\Api\AuthorizationRequest;
-use Zend\Diactoros\Response as Psr7Response;
-use Psr\Http\Message\ServerRequestInterface;
+use App\Http\Requests\Api\SocialAuthorizationRequest;
+use App\Models\User;
+use App\Traits\PassportToken;
+use Auth;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
-use App\Traits\PassportToken;
+use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response as Psr7Response;
 
 class AuthorizationsController extends Controller
 {
@@ -21,8 +20,8 @@ class AuthorizationsController extends Controller
     {
         return $this->response->array([
             'access_token' => $token,
-            'token_type' => 'Bearer',
-            'expires_in' => Auth::guard('api')->factory()->getTTL() * 60,
+            'token_type'   => 'Bearer',
+            'expires_in'   => Auth::guard('api')->factory()->getTTL() * 60,
         ]);
     }
 
@@ -61,9 +60,9 @@ class AuthorizationsController extends Controller
 
                 if (!$user) {
                     $user = User::create([
-                        'name' => $oauthUser->getNickname(),
-                        'avatar' => $oauthUser->getAvatar(),
-                        'weixin_openid' => $oauthUser->getId(),
+                        'name'           => $oauthUser->getNickname(),
+                        'avatar'         => $oauthUser->getAvatar(),
+                        'weixin_openid'  => $oauthUser->getId(),
                         'weixin_unionid' => $unionid,
                     ]);
                 }
@@ -75,13 +74,14 @@ class AuthorizationsController extends Controller
         }
 
         $token = $this->getBearerTokenByUser($user, '1', false);
+
         return $this->respondWithToken($token)->setStatusCode(201);
     }
 
     public function store(AuthorizationRequest $originRequest, AuthorizationServer $server, ServerRequestInterface $serverRequest)
     {
         try {
-            return $server->respondToAccessTokenRequest($serverRequest, new Psr7Response)->withStatus(201);
+            return $server->respondToAccessTokenRequest($serverRequest, new Psr7Response())->withStatus(201);
         } catch (OAuthServerException $e) {
             return $this->response->errorUnauthorized($e->getMessage());
         }
@@ -90,7 +90,7 @@ class AuthorizationsController extends Controller
     public function update(AuthorizationServer $server, ServerRequestInterface $serverRequest)
     {
         try {
-            return $server->respondToAccessTokenRequest($serverRequest, new Psr7Response);
+            return $server->respondToAccessTokenRequest($serverRequest, new Psr7Response());
         } catch (OAuthServerException $e) {
             return $this->response->errorUnauthorized($e->getMessage());
         }
@@ -99,6 +99,7 @@ class AuthorizationsController extends Controller
     public function destroy()
     {
         $this->user()->token()->revoke();
+
         return $this->response->noContent();
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Notifications;
 
+use App\Models\Topic;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use App\Models\Topic;
+use Illuminate\Notifications\Notification;
 
 class TopicCreated extends Notification implements ShouldQueue
 {
@@ -27,7 +27,8 @@ class TopicCreated extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function via($notifiable)
@@ -38,12 +39,13 @@ class TopicCreated extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
@@ -52,7 +54,8 @@ class TopicCreated extends Notification implements ShouldQueue
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function toArray($notifiable)
@@ -64,15 +67,15 @@ class TopicCreated extends Notification implements ShouldQueue
 
     public function toDatabase($notifiable)
     {
-        $link = $this->topic->link(['#Post' . $this->topic->id]);
+        $link = $this->topic->link(['#Post'.$this->topic->id]);
 
         return [
-            'topic_id' => $this->topic->id,
-            'topic_body' => $this->topic->body,
-            'user_id' => $this->topic->user->id,
-            'user_name' => $this->topic->user->name,
+            'topic_id'    => $this->topic->id,
+            'topic_body'  => $this->topic->body,
+            'user_id'     => $this->topic->user->id,
+            'user_name'   => $this->topic->user->name,
             'user_avatar' => $this->topic->user->getAvatar(),
-            'topic_link' => $link,
+            'topic_link'  => $link,
             'topic_title' => $this->topic->title,
         ];
     }

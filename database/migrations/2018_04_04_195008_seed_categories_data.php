@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class SeedCategoriesData extends Migration
@@ -15,15 +13,15 @@ class SeedCategoriesData extends Migration
     {
         $categories = [
             [
-                'name' => 'share',
+                'name'        => 'share',
                 'description' => 'create and descover',
             ],
             [
-                'name' => 'cursor',
+                'name'        => 'cursor',
                 'description' => 'skill, develop',
             ],
             [
-                'name' => 'board',
+                'name'        => 'board',
                 'description' => 'state',
             ],
         ];

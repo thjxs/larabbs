@@ -24,7 +24,7 @@ class VerificationCodeRequest extends FormRequest
     public function rules()
     {
         return [
-            'captcha_key' => 'required|string',
+            'captcha_key'  => 'required|string',
             'captcha_code' => 'required|string',
         ];
     }
@@ -32,7 +32,7 @@ class VerificationCodeRequest extends FormRequest
     public function attributes()
     {
         return [
-            'captcha_key' => 'captcha_key',
+            'captcha_key'  => 'captcha_key',
             'captcha_code' => 'captcha_code',
         ];
     }

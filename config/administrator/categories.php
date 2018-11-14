@@ -3,12 +3,12 @@
 use App\Models\Category;
 
 return [
-    'title' => 'category',
+    'title'  => 'category',
     'single' => 'category',
-    'model' => Category::class,
+    'model'  => Category::class,
 
     'action_permission' => [
-        'delete' => function() {
+        'delete' => function () {
             return Auth::user()->hasRole('Founder');
         },
     ],
@@ -18,15 +18,15 @@ return [
             'title' => 'ID',
         ],
         'name' => [
-            'title' => 'title',
+            'title'    => 'title',
             'sortable' => false,
         ],
         'description' => [
-            'title' => 'description',
+            'title'    => 'description',
             'sortable' => false,
         ],
         'operation' => [
-            'title' => 'manage',
+            'title'    => 'manage',
             'sortable' => false,
         ],
     ],
@@ -36,7 +36,7 @@ return [
         ],
         'description' => [
             'title' => 'description',
-            'type' => 'textarea'
+            'type'  => 'textarea',
         ],
     ],
     'filters' => [

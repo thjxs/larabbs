@@ -22,7 +22,6 @@ Route::get('users/{user}/followers', 'UsersController@showFollowers')->name('use
 Route::post('/users/followers/{user}', 'FollowersController@store')->name('followers.store');
 Route::delete('/users/followers/{user}', 'FollowersController@destroy')->name('followers.destroy');
 
-
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
 
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
@@ -38,4 +37,3 @@ Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]
 Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
 
 Route::get('permission-denied', 'PagesController@permissionDenied')->name('permission-denied');
-

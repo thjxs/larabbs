@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use Dingo\Api\Routing\Route;
-use Illuminate\Http\Request;
-use Illuminate\Auth\AuthManager;
 use Dingo\Api\Auth\Provider\Authorization;
+use Dingo\Api\Routing\Route;
+use Illuminate\Auth\AuthManager;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class PassportDingoProvider extends Authorization

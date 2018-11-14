@@ -2,17 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Auth;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements JWTSubject
 {
     use HasRoles, HasApiTokens, Traits\ActiveUserHelper, Traits\LastActivedAtHelper;
-
     use Notifiable {
         notify as protected laravelNotify;
     }
@@ -70,7 +69,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * Gravatar 全球通用头像
+     * Gravatar 全球通用头像.
      *
      * @return url
      */
@@ -79,14 +78,15 @@ class User extends Authenticatable implements JWTSubject
         //$this->attributes['email']  获取用户的邮箱
         //trim 剔除空白内容
         $hash = md5(strtolower(trim($this->attributes['email'])));
-        $avatar = $this->attributes['avatar'] ? : "http://www.gravatar.com/avatar/$hash?s=$size";
+        $avatar = $this->attributes['avatar'] ?: "http://www.gravatar.com/avatar/$hash?s=$size";
+
         return $avatar;
     }
 
     public function setAvatarAttribute($path)
     {
-        if (! starts_with($path, 'http')) {
-            $path = config('app.url') . "/uploads/images/avatars/$path";
+        if (!starts_with($path, 'http')) {
+            $path = config('app.url')."/uploads/images/avatars/$path";
         }
 
         $this->attributes['avatar'] = $path;
@@ -131,12 +131,12 @@ class User extends Authenticatable implements JWTSubject
 
     public function followers()
     {
-        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
+        return $this->belongsToMany(self::class, 'followers', 'user_id', 'follower_id');
     }
 
     public function followings()
     {
-        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
+        return $this->belongsToMany(self::class, 'followers', 'follower_id', 'user_id');
     }
 
     public function follow($user_ids)

@@ -3,12 +3,11 @@
 use Spatie\Permission\Models\Role;
 
 return [
-    'title' => 'role',
+    'title'  => 'role',
     'single' => 'role',
-    'model' => Role::class,
+    'model'  => Role::class,
 
-    'permission' => function()
-    {
+    'permission' => function () {
         return Auth::user()->can('manage_users');
     },
 
@@ -20,20 +19,21 @@ return [
             'title' => 'identification',
         ],
         'permissions' => [
-            'title' => 'permission',
+            'title'  => 'permission',
             'output' => function ($value, $model) {
                 $model->load('permissions');
                 $result = [];
                 foreach ($model->permissions as $permission) {
                     $result[] = $permission->name;
                 }
+
                 return empty($result) ? 'N/A' : implode($result, ' | ');
             },
             'sortable' => false,
         ],
 
         'operation' => [
-            'title' => 'manage',
+            'title'  => 'manage',
             'output' => function ($value, $model) {
                 return $value;
             },
@@ -46,8 +46,8 @@ return [
             'title' => 'identification',
         ],
         'permissions' => [
-            'type' => 'relationship',
-            'title' => 'permission',
+            'type'       => 'relationship',
+            'title'      => 'permission',
             'name_field' => 'name',
         ],
     ],

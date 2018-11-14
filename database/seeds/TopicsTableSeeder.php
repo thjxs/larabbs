@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Seeder;
+use App\Models\Category;
 use App\Models\Topic;
 use App\Models\User;
-use App\Models\Category;
+use Illuminate\Database\Seeder;
 
 class TopicsTableSeeder extends Seeder
 {
@@ -21,6 +21,4 @@ class TopicsTableSeeder extends Seeder
 
         Topic::insert($topics->toArray());
     }
-
 }
-

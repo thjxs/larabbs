@@ -25,11 +25,11 @@ trait PassportToken
         try {
             return bin2hex(random_bytes($length));
         } catch (\TypeError $e) {
-            throw OAuthServerException::serverError("An unexpected error has occurred");
+            throw OAuthServerException::serverError('An unexpected error has occurred');
         } catch (\Error $e) {
-            throw OAuthServerException::serverError("An unexpected error has occurred");
-        } catch(\Exception $e) {
-            throw OAuthServerException::serverError("could not generate a random string");
+            throw OAuthServerException::serverError('An unexpected error has occurred');
+        } catch (\Exception $e) {
+            throw OAuthServerException::serverError('could not generate a random string');
         }
     }
 
@@ -44,8 +44,10 @@ trait PassportToken
 
         while ($maxGenerationAttempts-- > 0) {
             $refreshToken->setIdentifier($this->generateUniqueIdentifier());
+
             try {
                 $refreshTokenRepository->persistNewRefreshToken($refreshToken);
+
                 return $refreshToken;
             } catch (UniqueTokenIdentifierConstraintViolationException $e) {
                 if ($maxGenerationAttempts === 0) {
@@ -67,7 +69,7 @@ trait PassportToken
         $refreshToken = $this->issueRefreshToken($accessToken);
 
         return [
-            'access_token' => $accessToken,
+            'access_token'  => $accessToken,
             'refresh_token' => $refreshToken,
         ];
     }
@@ -78,12 +80,12 @@ trait PassportToken
         $response->setAccessToken($accessToken);
         $response->setRefreshToken($refreshToken);
 
-        $privateKey = new CryptKey('file://' . Passport::keyPath('oauth-private.key'), null, false);
+        $privateKey = new CryptKey('file://'.Passport::keyPath('oauth-private.key'), null, false);
 
         $response->setPrivateKey($privateKey);
         $response->setEncryptionKey(app('encrypter')->getKey());
 
-        return $response->generateHttpResponse(new Response);
+        return $response->generateHttpResponse(new Response());
     }
 
     protected function getBearerTokenByUser(User $user, $clientId, $output = true)

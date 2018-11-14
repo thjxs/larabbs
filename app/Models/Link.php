@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Cache;
+use Illuminate\Database\Eloquent\Model;
 
 class Link extends Model
 {
@@ -14,7 +14,7 @@ class Link extends Model
 
     public function getAllCached()
     {
-        return Cache::remember($this->cache_key, $this->cache_expire_in_minutes, function() {
+        return Cache::remember($this->cache_key, $this->cache_expire_in_minutes, function () {
             return $this->all();
         });
     }

@@ -9,8 +9,7 @@ return [
 
     'model' => User::class,
 
-    'permission' => function()
-    {
+    'permission' => function () {
         return Auth::user()->can('manage_users');
     },
 
@@ -28,9 +27,9 @@ return [
         ],
 
         'name' => [
-            'title' => 'User name',
+            'title'    => 'User name',
             'sortable' => false,
-            'output' => function($name, $model) {
+            'output'   => function ($name, $model) {
                 return '<a href="/users/'.$model->id.'" target=_blank>'.$name.'</a>';
             },
         ],
@@ -40,7 +39,7 @@ return [
         ],
 
         'operation' => [
-            'title' => 'manage',
+            'title'    => 'manage',
             'sortable' => false,
         ],
     ],
@@ -54,16 +53,16 @@ return [
         ],
         'password' => [
             'title' => 'passowrd',
-            'type' => 'password',
+            'type'  => 'password',
         ],
         'avatar' => [
-            'title' => 'avatar',
-            'type' => 'image',
-            'location' => public_path() . '/uploads/images/avatars/',
+            'title'    => 'avatar',
+            'type'     => 'image',
+            'location' => public_path().'/uploads/images/avatars/',
         ],
         'roles' => [
-            'title' => 'Role',
-            'type' => 'relationship',
+            'title'      => 'Role',
+            'type'       => 'relationship',
             'name_field' => 'name',
         ],
 

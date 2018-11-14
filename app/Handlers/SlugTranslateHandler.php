@@ -9,7 +9,7 @@ class SlugTranslateHandler
 {
     public function translate($text)
     {
-        $http = new Client;
+        $http = new Client();
 
         $api = 'http://api.fanyi.baidu.com/api/trans/vip/translate?';
         $appid = config('services.baidu_translate.appid');
@@ -20,15 +20,15 @@ class SlugTranslateHandler
             return $this->pinyin($text);
         }
 
-        $sign = md5($appid . $text . $salt . $key);
+        $sign = md5($appid.$text.$salt.$key);
 
         $query = http_build_query([
-            'q' => $text,
-            'from' => 'zh',
-            'to' => 'en',
+            'q'     => $text,
+            'from'  => 'zh',
+            'to'    => 'en',
             'appid' => $appid,
-            'salt' => $salt,
-            'sign' => $sign,
+            'salt'  => $salt,
+            'sign'  => $sign,
         ]);
 
         $response = $http->get($api.$query);
