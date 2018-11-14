@@ -4,8 +4,8 @@ namespace App\Observers;
 
 use App\Models\Reply;
 use App\Models\User;
-use App\Notifications\TopicReplied;
 use App\Notifications\AtSomeone;
+use App\Notifications\TopicReplied;
 
 // creating, created, updating, updated, saving,
 // saved,  deleting, deleted, restoring, restored

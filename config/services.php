@@ -20,7 +20,7 @@ return [
     ],
 
     'ses' => [
-        'key' => env('SES_KEY'),
+        'key'    => env('SES_KEY'),
         'secret' => env('SES_SECRET'),
         'region' => 'us-east-1',
     ],
@@ -30,20 +30,20 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\Models\User::class,
-        'key' => env('STRIPE_KEY'),
+        'model'  => App\Models\User::class,
+        'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
 
     'baidu_translate' => [
         'appid' => env('BAIDU_TRANSLATE_APPID'),
-        'key' => env('BAIDU_TRANSLATE_KEY'),
+        'key'   => env('BAIDU_TRANSLATE_KEY'),
     ],
 
     'weixin' => [
-        'client_id' => env('WEIXIN_KEY'),
+        'client_id'     => env('WEIXIN_KEY'),
         'client_secret' => env('WEIXIN_SECRET'),
-        'redirect' => env('WEIXIN_REDIRECT_URI'),
+        'redirect'      => env('WEIXIN_REDIRECT_URI'),
     ],
 
 ];

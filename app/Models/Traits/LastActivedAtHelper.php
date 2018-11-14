@@ -2,8 +2,8 @@
 
 namespace App\Models\Traits;
 
-use Redis;
 use Carbon\Carbon;
+use Redis;
 
 trait LastActivedAtHelper
 {
@@ -39,15 +39,15 @@ trait LastActivedAtHelper
     }
 
     /**
-    * Get user last actived datetime
-    *
-    * @return timestamp
-    */
+     * Get user last actived datetime.
+     *
+     * @return timestamp
+     */
     public function getLastActivedAtAttribute($value)
     {
         $hash = $this->getHashFromDateString(Carbon::now()->toDateString());
         $field = $this->getHashField();
-        $datetime = Redis::hGet($hash, $field) ? :$value;
+        $datetime = Redis::hGet($hash, $field) ?: $value;
 
         if ($datetime) {
             return new Carbon($datetime);
@@ -57,22 +57,22 @@ trait LastActivedAtHelper
     }
 
     /**
-    * Get hash table name: larabbs_last_actived_at_2018-04-10
-    *
-    * @return string
-    */
+     * Get hash table name: larabbs_last_actived_at_2018-04-10.
+     *
+     * @return string
+     */
     protected function getHashFromDateString($date_string)
     {
-        return $this->hash_prefix . $date_string;
+        return $this->hash_prefix.$date_string;
     }
 
     /**
-    * Get hash field: user_1
-    *
-    * @return string
-    */
+     * Get hash field: user_1.
+     *
+     * @return string
+     */
     protected function getHashField()
     {
-        return $this->field_prefix . $this->id;
+        return $this->field_prefix.$this->id;
     }
 }

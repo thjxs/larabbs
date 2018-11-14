@@ -2,10 +2,10 @@
 
 namespace App\Models\Traits;
 
-use App\Models\Topic;
 use App\Models\Reply;
-use Carbon\Carbon;
+use App\Models\Topic;
 use Cache;
+use Carbon\Carbon;
 use DB;
 
 trait ActiveUserHelper
@@ -22,7 +22,7 @@ trait ActiveUserHelper
 
     public function getActiveUsers()
     {
-        return Cache::remember($this->cacheKey, $this->cacheExpireInMinutes, function() {
+        return Cache::remember($this->cacheKey, $this->cacheExpireInMinutes, function () {
             return $this->calculateActiveUsers();
         });
     }

@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\Reply;
-use App\Models\User;
 use App\Models\Topic;
+use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class ReplysTableSeeder extends Seeder
 {
@@ -20,6 +20,4 @@ class ReplysTableSeeder extends Seeder
 
         Reply::insert($replys->toArray());
     }
-
 }
-

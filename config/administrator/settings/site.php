@@ -3,35 +3,35 @@
 return [
     'title' => 'site setting',
 
-    'permission' => function() {
+    'permission' => function () {
         return Auth::user()->hasRole('Founder');
     },
 
     'edit_fields' => [
         'site_name' => [
             'title' => 'site name',
-            'type' => 'text',
+            'type'  => 'text',
             'limit' => 50,
         ],
         'contact_email' => [
             'title' => 'contact email',
-            'type' => 'text',
+            'type'  => 'text',
             'limit' => 50,
         ],
         'seo_description' => [
             'title' => 'SEO - Descritpion',
-            'type' => 'textarea',
+            'type'  => 'textarea',
             'limit' => 250,
         ],
         'seo_keyword' => [
             'title' => 'SEO - Keywords',
-            'type' => 'textarea',
+            'type'  => 'textarea',
             'limit' => 250,
         ],
     ],
 
     'rules' => [
-        'site_name' => 'required|max:50',
+        'site_name'     => 'required|max:50',
         'contact_email' => 'email',
     ],
     // 'before_save' => function (&$data) {
@@ -42,14 +42,15 @@ return [
 
     'actions' => [
         'clear_cache' => [
-            'title' => 'clear cache',
+            'title'    => 'clear cache',
             'messages' => [
-                'active' => 'clearing',
+                'active'  => 'clearing',
                 'success' => 'cache clear',
-                'error' => 'error',
+                'error'   => 'error',
             ],
             'action' => function (&$data) {
                 \Artisan::call('cache:clear');
+
                 return true;
             },
         ],

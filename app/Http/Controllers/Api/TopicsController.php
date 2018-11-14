@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Api\TopicRequest;
 use App\Models\Topic;
 use App\Models\User;
 use App\Transformers\TopicTransformer;
-use App\Http\Requests\Api\TopicRequest;
+use Illuminate\Http\Request;
 
 class TopicsController extends Controller
 {
@@ -28,12 +28,14 @@ class TopicsController extends Controller
         }
 
         $topics = $query->paginate(20);
+
         return $this->response->paginator($topics, new TopicTransformer());
     }
 
     public function userIndex(User $user, Request $request)
     {
         $topics = $user->topics()->recent()->paginate(20);
+
         return $this->response->paginator($topics, new TopicTransformer());
     }
 
@@ -55,6 +57,7 @@ class TopicsController extends Controller
     {
         $this->authorize('update', $topic);
         $topic->update($request->all());
+
         return $this->response->item($topic, new TopicTransformer());
     }
 
@@ -62,6 +65,7 @@ class TopicsController extends Controller
     {
         $this->authorize('update', $topic);
         $topic->delete();
+
         return $this->response->noContent();
     }
 }

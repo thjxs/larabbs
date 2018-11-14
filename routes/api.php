@@ -20,14 +20,14 @@ use Illuminate\Http\Request;
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
-    'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => ['serializer:array', 'bindings', 'change-locale']
+    'namespace'  => 'App\Http\Controllers\Api',
+    'middleware' => ['serializer:array', 'bindings', 'change-locale'],
 ], function ($api) {
     $api->group([
         'middleware' => 'api.throttle',
-        'limit' => config('api.rate_limits.sign.limit'),
-        'expires' => config('api.rate_limits.sign.expires'),
-    ], function($api) {
+        'limit'      => config('api.rate_limits.sign.limit'),
+        'expires'    => config('api.rate_limits.sign.expires'),
+    ], function ($api) {
         $api->post('verificationCodes', 'VerificationCodesController@store')->name('api.verificationCodes.store');
         $api->post('users', 'UsersController@store')->name('api.users.store');
         $api->post('captchas', 'CaptchasController@store')->name('api.captchas.store');
@@ -43,7 +43,7 @@ $api->version('v1', [
         $api->get('users/{user}/replies', 'RepliesController@userIndex')->name('api.users.replies.index');
         $api->get('links', 'LinksController@index')->name('api.links.index');
         $api->get('actived/users', 'UsersController@activedIndex')->name('api.actived.users.index');
-        $api->group(['middleware' => 'api.auth'], function($api) {
+        $api->group(['middleware' => 'api.auth'], function ($api) {
             $api->get('user', 'UsersController@me')->name('api.user.show');
             $api->post('images', 'ImagesController@store')->name('api.images.store');
             $api->patch('user', 'UsersController@update')->name('api.user.update');

@@ -3,11 +3,11 @@
 use Spatie\Permission\Models\Permission;
 
 return [
-    'title' => 'permission',
+    'title'  => 'permission',
     'single' => 'permission',
-    'model' => Permission::class,
+    'model'  => Permission::class,
 
-    'permission' => function() {
+    'permission' => function () {
         return Auth::user()->can('manage_users');
     },
 
@@ -15,7 +15,7 @@ return [
         'create' => function ($model) {
             return true;
         },
-        'update' => function($model) {
+        'update' => function ($model) {
             return true;
         },
         'delete' => function ($model) {
@@ -34,7 +34,7 @@ return [
             'title' => 'identification',
         ],
         'operation' => [
-            'title' => 'manage',
+            'title'    => 'manage',
             'sortable' => false,
         ],
     ],
@@ -42,11 +42,11 @@ return [
     'edit_fields' => [
         'name' => [
             'title' => '(!!)identification',
-            'hint' => 'important',
+            'hint'  => 'important',
         ],
         'roles' => [
-            'type' => 'relationship',
-            'title' => 'role',
+            'type'       => 'relationship',
+            'title'      => 'role',
             'name_field' => 'name',
         ],
     ],

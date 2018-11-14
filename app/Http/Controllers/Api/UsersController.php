@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\Api\UserRequest;
-use App\Transformers\UserTransformer;
 use App\Models\Image;
+use App\Models\User;
+use App\Transformers\UserTransformer;
 
 class UsersController extends Controller
 {
@@ -14,7 +13,7 @@ class UsersController extends Controller
     {
         $verifyDate = \Cache::get($request->verification_key);
 
-        if(!$verifyDate) {
+        if (!$verifyDate) {
             return $this->response->error('verification_code expired', 422);
         }
 
@@ -23,8 +22,8 @@ class UsersController extends Controller
         }
 
         $user = User::create([
-            'name' => $request->name,
-            'phone' => $verifyDate['phone'],
+            'name'     => $request->name,
+            'phone'    => $verifyDate['phone'],
             'password' => bcrypt($request->password),
         ]);
 
@@ -32,8 +31,8 @@ class UsersController extends Controller
 
         return $this->response->item($user, new UserTransformer())->setMeta([
             'access_token' => \Auth::guard('api')->fromUser($user),
-            'token_type' => 'Bearer',
-            'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
+            'token_type'   => 'Bearer',
+            'expires_in'   => \Auth::guard('api')->factory()->getTTL() * 60,
         ])->setStatusCode(201);
     }
 

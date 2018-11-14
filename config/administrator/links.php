@@ -3,13 +3,12 @@
 use App\Models\Link;
 
 return [
-    'title' => 'recommend',
+    'title'  => 'recommend',
     'single' => 'recommend',
 
     'model' => Link::class,
 
-    'permission' => function()
-    {
+    'permission' => function () {
         return Auth::user()->hasRole('Founder');
     },
 
@@ -18,15 +17,15 @@ return [
             'title' => 'ID',
         ],
         'title' => [
-            'title' => 'name',
+            'title'    => 'name',
             'sortable' => false,
         ],
         'link' => [
-            'title' => 'link',
+            'title'    => 'link',
             'sortable' => false,
         ],
         'operation' => [
-            'title' => 'manage',
+            'title'    => 'manage',
             'sortable' => false,
         ],
     ],
