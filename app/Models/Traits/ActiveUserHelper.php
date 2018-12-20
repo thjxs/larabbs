@@ -4,21 +4,28 @@ namespace App\Models\Traits;
 
 use App\Models\Reply;
 use App\Models\Topic;
+use App\Models\User;
 use Cache;
 use Carbon\Carbon;
 use DB;
+use Spatie\Activitylog\Models\Activity;
 
 trait ActiveUserHelper
 {
-    protected static $activeUsers = [];
+    protected $subjectTypes = [
+        'App\\Models\\Topic' => 4,
+        'App\\Models\\Reply' => 2,
+    ];
 
-    protected static $topicWeights = 4;
-    protected static $replyWeights = 1;
     protected static $pastDays = 7;
-    protected static $userLimits = 6;
+    protected static $userLimits = 3;
 
     protected $cacheKey = 'larabbs_active_users';
     protected $cacheExpireInMinutes = 65;
+
+    protected function lookup($subjectType) {
+        return collect($subjectTypes)->get($subjectType, 1);
+    }
 
     public function getActiveUsers()
     {
@@ -35,51 +42,28 @@ trait ActiveUserHelper
 
     private function calculateActiveUsers()
     {
-        static::calculateReplyScore();
-        static::calculateTopicScore();
+        $activityLogCollections = Activity::select('causer_id', 'subject_type')
+            ->where('created_at', '>=', now()->subDays(static::$pastDays))
+            ->get()->mapToGroups(function ($item) {
+                return [$item['causer_id'] => $item['subject_type']];
+            });
 
-        arsort(static::$activeUsers);
+        $scoreCollection = collect();
 
-        array_slice(static::$activeUsers, 0, static::$userLimits, true);
+        foreach ($activityLogCollections as $key => $collection) {
+            $score = $collection->map(function ($subject_type) {
+                return $this->lookup($subject_type);
+            })->sum();
 
-        $activeUsersCollection = collect();
-
-        foreach (static::$activeUsers as $user_id => $user) {
-            $user = $this->find($user_id);
-            if ($user) {
-                $activeUsersCollection->push($user);
-            }
+            $scoreCollection->push(['user_id' => $key, 'score' => $score]);
         }
 
-        return $activeUsersCollection;
-    }
+        $users = User::find(
+            $scoreCollection->sortByDesc('score')
+                ->take(static::$userLimits)->pluck('user_id')
+        );
 
-    private static function calculateTopicScore()
-    {
-        $topicUsers = Topic::query()
-            ->select(DB::raw('user_id, count(*) as topic_count'))
-            ->where('created_at', '>=', Carbon::now()->subDays(static::$pastDays))
-            ->groupBy('user_id')
-            ->get();
-        foreach ($topicUsers as $user) {
-            static::$activeUsers[$user->user_id]['score'] =
-                (static::$activeUsers[$user->user_id]['score'] ?? 0) +
-                    $user->topic_count * static::$topicWeights;
-        }
-    }
-
-    private static function calculateReplyScore()
-    {
-        $replyUsers = Reply::query()
-            ->select(DB::raw('user_id, count(*) as reply_count'))
-            ->where('created_at', '>=', Carbon::now()->subDays(static::$pastDays))
-            ->groupBy('user_id')
-            ->get();
-
-        foreach ($replyUsers as $user) {
-            static::$activeUsers[$user->user_id]['score'] =
-                $user->reply_count * static::$replyWeights;
-        }
+        return collect($users);
     }
 
     private function cacheActiveUers($activeUsersCollection)
