@@ -2,12 +2,8 @@
 
 namespace App\Models\Traits;
 
-use App\Models\Reply;
-use App\Models\Topic;
 use App\Models\User;
 use Cache;
-use Carbon\Carbon;
-use DB;
 use Spatie\Activitylog\Models\Activity;
 
 trait ActiveUserHelper
@@ -23,7 +19,8 @@ trait ActiveUserHelper
     protected $cacheKey = 'larabbs_active_users';
     protected $cacheExpireInMinutes = 65;
 
-    protected function lookup($subjectType) {
+    protected function lookup($subjectType)
+    {
         return collect($subjectTypes)->get($subjectType, 1);
     }
 
