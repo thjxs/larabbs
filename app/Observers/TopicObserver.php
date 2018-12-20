@@ -44,6 +44,11 @@ class TopicObserver
         if (!$topic->slug) {
             dispatch(new TranslateSlug($topic));
         }
+
+        activity('TopicCreated')
+            ->performedOn($topic)
+            ->causedBy($topic->user)
+            ->log('TopicCreated');
     }
 
     public function deleted(Topic $topic)
