@@ -21,7 +21,7 @@ trait ActiveUserHelper
 
     protected function lookup($subjectType)
     {
-        return collect($subjectTypes)->get($subjectType, 1);
+        return collect($this->subjectTypes)->get($subjectType, 1);
     }
 
     public function getActiveUsers()
