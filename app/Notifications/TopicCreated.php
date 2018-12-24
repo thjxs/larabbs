@@ -74,7 +74,7 @@ class TopicCreated extends Notification implements ShouldQueue
             'topic_body'  => $this->topic->body,
             'user_id'     => $this->topic->user->id,
             'user_name'   => $this->topic->user->name,
-            'user_avatar' => $this->topic->user->getAvatar(),
+            'user_avatar' => $this->topic->user->avatar,
             'topic_link'  => $link,
             'topic_title' => $this->topic->title,
         ];

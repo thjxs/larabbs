@@ -73,7 +73,7 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return url
      */
-    public function getAvatar($size = '100')
+    public function getAvatarAttribute($size = '100')
     {
         //$this->attributes['email']  获取用户的邮箱
         //trim 剔除空白内容
