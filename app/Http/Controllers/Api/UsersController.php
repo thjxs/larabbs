@@ -41,6 +41,15 @@ class UsersController extends Controller
         return $this->response->item($this->user(), new UserTransformer());
     }
 
+    public function logout()
+    {
+        if (Auth::check()) {
+            Auth::user()->token()->revoke();
+
+            return $this->response->noContent();
+        }
+    }
+
     public function update(UserRequest $request)
     {
         $user = $this->user();

@@ -45,6 +45,7 @@ $api->version('v1', [
         $api->get('actived/users', 'UsersController@activedIndex')->name('api.actived.users.index');
         $api->group(['middleware' => 'api.auth'], function ($api) {
             $api->get('user', 'UsersController@me')->name('api.user.show');
+            $api->post('logout', 'UsersController@logout')->name('api.user.logout');
             $api->post('images', 'ImagesController@store')->name('api.images.store');
             $api->patch('user', 'UsersController@update')->name('api.user.update');
             $api->post('topics', 'TopicsController@store')->name('api.topics.store');
