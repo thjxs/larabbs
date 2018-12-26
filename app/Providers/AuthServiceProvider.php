@@ -5,6 +5,12 @@ namespace App\Providers;
 use Carbon\Carbon;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
+use App\Models\Reply;
+use App\Models\Topic;
+use App\Models\User;
+use App\Policies\ReplyPolicy;
+use App\Policies\TopicPolicy;
+use App\Policies\UserPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,10 +20,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-         \App\Models\Reply::class => \App\Policies\ReplyPolicy::class,
-         \App\Models\Topic::class => \App\Policies\TopicPolicy::class,
-        'App\Model'               => 'App\Policies\ModelPolicy',
-        \App\Models\User::class   => \App\Policies\UserPolicy::class,
+        Reply::class => ReplyPolicy::class,
+        Topic::class => TopicPolicy::class,
+        User::class => UserPolicy::class,
     ];
 
     /**
@@ -29,8 +34,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Passport::routes();
-        Passport::tokensExpireIn(Carbon::now()->addDays(15));
-        Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
+        Passport::tokensExpireIn(Carbon::now()->addHours(1));
+        Passport::refreshTokensExpireIn(Carbon::now()->addDays(1));
 
         \Horizon::auth(function ($request) {
             return \Auth::user()->hasRole('Founder');
