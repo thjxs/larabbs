@@ -24,17 +24,19 @@ export default {
         }
     },
     computed: {
-        Start() {
-            if (this.pagination.total_page <= 10) {
-                return 1
-            }
 
-            return this.pagination.total_page/10
-        }
     },
     methods: {
         showingArray() {
-            return Array(end - start + 1).fill().map((c, idx) => start + idx)
+            if (this.pagination.total_pages <= 5) {
+                return Array(this.pagination.total_pages).fill().map((c, idx) => 1 + idx)
+            } else if (this.pagination.current_page + 2 > this.pagination.total_pages) {
+                return Array(5).fill().map((c, idx) => this.pagination.total_pages - 4 + idx)
+            } else if (this.pagination.current_page - 2 <= 0) {
+                return Array(5).fill().map((c, idx) => 1 + idx)
+            } else {
+                return Array(5).fill().map((c, idx) => this.pagination.current_page - 2 + idx)
+            }
         }
     }
 }
