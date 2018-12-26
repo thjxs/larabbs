@@ -8,7 +8,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use Carbon\Carbon;
 
 class User extends Authenticatable implements JWTSubject
 {

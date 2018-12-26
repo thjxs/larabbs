@@ -2,15 +2,15 @@
 
 namespace App\Providers;
 
-use Carbon\Carbon;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Laravel\Passport\Passport;
 use App\Models\Reply;
 use App\Models\Topic;
 use App\Models\User;
 use App\Policies\ReplyPolicy;
 use App\Policies\TopicPolicy;
 use App\Policies\UserPolicy;
+use Carbon\Carbon;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -22,7 +22,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Reply::class => ReplyPolicy::class,
         Topic::class => TopicPolicy::class,
-        User::class => UserPolicy::class,
+        User::class  => UserPolicy::class,
     ];
 
     /**
