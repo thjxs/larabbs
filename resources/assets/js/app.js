@@ -8,6 +8,28 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import http from './utils/http'
+import Vue from 'vue';
+import Routes from './routes';
+import store from './store'
+import VueRouter from 'vue-router';
+import VeeValidate from 'vee-validate';
+import App from './App';
+
+Vue.prototype.$http = http
+Vue.use(VeeValidate);
+
+let token = window.localStorage.getItem('access_token')
+if (token) {
+    store.commit('AUTH_SET_TOKEN', token)
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`
+}
+
+Vue.use(VueRouter);
+const router = new VueRouter({
+    routes: Routes,
+    mode: 'history'
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,8 +37,10 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-const app = new Vue({
-    el: '#app'
+new Vue({
+    el: '#app',
+    router,
+    store,
+    components: { App },
+    template: '<App/>'
 });
