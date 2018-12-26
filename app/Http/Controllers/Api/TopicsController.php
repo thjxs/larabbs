@@ -27,14 +27,14 @@ class TopicsController extends Controller
                 break;
         }
 
-        $topics = $query->paginate(20);
+        $topics = $query->paginate(8);
 
         return $this->response->paginator($topics, new TopicTransformer());
     }
 
     public function userIndex(User $user, Request $request)
     {
-        $topics = $user->topics()->recent()->paginate(20);
+        $topics = $user->topics()->recent()->paginate(8);
 
         return $this->response->paginator($topics, new TopicTransformer());
     }
