@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Carbon\Carbon;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -73,12 +74,12 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return url
      */
-    public function getAvatarAttribute($size = '100')
+    public function getAvatarAttribute()
     {
         //$this->attributes['email']  获取用户的邮箱
         //trim 剔除空白内容
         $hash = md5(strtolower(trim($this->attributes['email'])));
-        $avatar = $this->attributes['avatar'] ?: "http://www.gravatar.com/avatar/$hash?s=$size";
+        $avatar = $this->attributes['avatar'] ?: "http://www.gravatar.com/avatar/$hash?s=300";
 
         return $avatar;
     }
