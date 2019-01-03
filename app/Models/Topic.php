@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Models;
+use Laravel\Scout\Searchable;
 
 class Topic extends Model
 {
+    use Searchable;
+
     protected $fillable = ['title', 'body', 'category_id', 'excerpt', 'slug'];
 
     public function category()
@@ -49,5 +52,10 @@ class Topic extends Model
     public function link($params = [])
     {
         return route('topics.show', array_merge([$this->id, $this->slug], $params));
+    }
+
+    public function searchableAs()
+    {
+        return 'topics_index';
     }
 }

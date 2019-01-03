@@ -27,9 +27,16 @@ class TopicsController extends Controller
                 break;
         }
 
-        $topics = $query->paginate(8);
+        $topics = $query->paginate(10);
 
         return $this->response->paginator($topics, new TopicTransformer());
+    }
+
+    public function search(Request $request)
+    {
+        $topicsCollection = Topic::search($request->get('query'))->paginate(8);
+
+        return $this->response->paginator($topicsCollection, new TopicTransformer());
     }
 
     public function userIndex(User $user, Request $request)
