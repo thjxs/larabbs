@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Laravel\Scout\Searchable;
 
 class Topic extends Model
