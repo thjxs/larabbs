@@ -12,20 +12,19 @@ class TopicRequest extends Request
             // UPDATE
             case 'PUT':
             case 'PATCH':
-            {
+
                 return [
                     // UPDATE ROLES
                     'title'       => 'required|min:2',
                     'body'        => 'required|min:3',
                     'category_id' => 'required|numeric',
                 ];
-            }
+
             case 'GET':
             case 'DELETE':
             default:
-            {
-                return [];
-            };
+
+                return []; ;
         }
     }
 

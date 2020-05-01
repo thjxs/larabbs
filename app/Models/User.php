@@ -11,7 +11,10 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasRoles, HasApiTokens, Traits\ActiveUserHelper, Traits\LastActivedAtHelper;
+    use HasRoles;
+    use HasApiTokens;
+    use Traits\ActiveUserHelper;
+    use Traits\LastActivedAtHelper;
     use Notifiable {
         notify as protected laravelNotify;
     }
