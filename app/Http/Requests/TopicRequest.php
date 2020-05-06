@@ -24,7 +24,7 @@ class TopicRequest extends Request
             case 'DELETE':
             default:
 
-                return []; ;
+                return [];
         }
     }
 
